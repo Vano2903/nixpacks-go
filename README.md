@@ -1,6 +1,6 @@
 # nixpacks-go
 
-nixpacks-go is a golang sdk for (nixpacks)[https://github.com/railwayapp/nixpacks].
+nixpacks-go is a golang sdk for [nixpacks](https://github.com/railwayapp/nixpacks).
 
 ## Dependencies
 
