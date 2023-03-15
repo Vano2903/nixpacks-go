@@ -15,7 +15,9 @@ If you dont have nixpacks installed you can check the documentation at: https://
 package main
 
 import (
+    "context"
     "fmt"
+
     nixpacks "github.com/vano2903/nixpacks-go"
 )
 
@@ -24,7 +26,7 @@ func main(){
     if err != nil {
         panic(err)
     }
-    
+
     cmd, err := n.Build(context.Background(), nixpacks.BuildOptions{
         Path: "path/to/directory/to/build",
         Name: "image-name",
@@ -43,6 +45,7 @@ func main(){
 ```
 
 ---
+
 This sdk is still under development and is not ready for a production environment.
 
 Most of the options to build and plan an image are implemented but there are still some missing (about cache mainly).
