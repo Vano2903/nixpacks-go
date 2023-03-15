@@ -71,40 +71,40 @@ func (o *BuildOptions) Validate() error {
 func (o *BuildOptions) ToArgs() []string {
 	var args []string
 	if o.Name != "" {
-		args = append(args, "--name "+o.Name)
+		args = append(args, "--name", o.Name)
 	}
 
 	if o.Output != "" {
-		args = append(args, "--out "+o.Output)
+		args = append(args, "--out", o.Output)
 	}
 
 	if o.JsonPlan != "" {
-		args = append(args, "--json-plan "+o.JsonPlan)
+		args = append(args, "--json-plan", o.JsonPlan)
 	}
 
 	if o.Tag != "" {
-		args = append(args, "--tag "+o.Tag)
+		args = append(args, "--tag", o.Tag)
 	}
 
 	if o.InstallCommand != "" {
-		args = append(args, "--install-cmd "+o.InstallCommand)
+		args = append(args, "--install-cmd", o.InstallCommand)
 	}
 
 	if len(o.Labels) != 0 {
 		for _, label := range o.Labels {
-			args = append(args, "--label "+label.Key+"="+label.Value)
+			args = append(args, "--label", label.Key+"="+label.Value)
 		}
 	}
 
 	if o.BuildCommand != "" {
-		args = append(args, "--build-cmd "+o.BuildCommand)
+		args = append(args, "--build-cmd", o.BuildCommand)
 	}
 	if o.Platform != "" {
-		args = append(args, "--platform "+o.Platform)
+		args = append(args, "--platform", o.Platform)
 	}
 
 	if o.StartCommand != "" {
-		args = append(args, "--start-cmd "+o.StartCommand)
+		args = append(args, "--start-cmd", o.StartCommand)
 	}
 
 	if o.CurrentDirectory {
@@ -113,13 +113,13 @@ func (o *BuildOptions) ToArgs() []string {
 
 	if len(o.NixPackages) != 0 {
 		for _, pkg := range o.NixPackages {
-			args = append(args, "--pkgs "+pkg)
+			args = append(args, "--pkgs", pkg)
 		}
 	}
 
 	if len(o.AptPackages) != 0 {
 		for _, pkg := range o.AptPackages {
-			args = append(args, "--apt "+pkg)
+			args = append(args, "--apt", pkg)
 		}
 	}
 
@@ -129,18 +129,18 @@ func (o *BuildOptions) ToArgs() []string {
 
 	if len(o.NixLibraries) != 0 {
 		for _, lib := range o.NixLibraries {
-			args = append(args, "--libs "+lib)
+			args = append(args, "--libs", lib)
 		}
 	}
 
 	if len(o.Envs) != 0 {
 		for _, env := range o.Envs {
-			args = append(args, "--env "+env.Key+"="+env.Value)
+			args = append(args, "--env", env.Key+"="+env.Value)
 		}
 	}
 
 	if o.Config != "" {
-		args = append(args, "--config "+o.Config)
+		args = append(args, "--config", o.Config)
 	}
 
 	if o.NoErrorWithoutStartCommand {
