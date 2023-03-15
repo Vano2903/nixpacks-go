@@ -2,7 +2,6 @@ package nixpacks
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 )
 
@@ -29,9 +28,7 @@ func (o *BuildOutput) Parse() error {
 	var skipFirst bool
 
 	for _, line := range r {
-		fmt.Println("l:", line)
 		if strings.HasPrefix(line, "║ setup") {
-			fmt.Println("found setup: " + line)
 			o.Language = strings.ReplaceAll(line, "║ setup", "")
 			o.Language = strings.Split(o.Language, "│")[1]
 			o.Language = strings.ReplaceAll(o.Language, "║", "")

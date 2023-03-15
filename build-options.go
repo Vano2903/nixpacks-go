@@ -2,7 +2,6 @@ package nixpacks
 
 import (
 	"errors"
-	"fmt"
 )
 
 type (
@@ -72,41 +71,40 @@ func (o *BuildOptions) Validate() error {
 func (o *BuildOptions) ToArgs() []string {
 	var args []string
 	if o.Name != "" {
-		args = append(args, fmt.Sprintf("--name %q", o.Name))
+		args = append(args, "--name "+o.Name)
 	}
 
 	if o.Output != "" {
-		args = append(args, fmt.Sprintf("--out %q", o.Output))
+		args = append(args, "--out "+o.Output)
 	}
 
 	if o.JsonPlan != "" {
-		// args = append(args, "--json-plan "+o.JsonPlan)
-		args = append(args, fmt.Sprintf("--json-plan %q", o.Path))
+		args = append(args, "--json-plan "+o.JsonPlan)
 	}
 
 	if o.Tag != "" {
-		args = append(args, fmt.Sprintf("--tag %q", o.Tag))
+		args = append(args, "--tag "+o.Tag)
 	}
 
 	if o.InstallCommand != "" {
-		args = append(args, fmt.Sprintf("--install-cmd %q", o.InstallCommand))
+		args = append(args, "--install-cmd "+o.InstallCommand)
 	}
 
 	if len(o.Labels) != 0 {
 		for _, label := range o.Labels {
-			args = append(args, fmt.Sprintf("--label %q", label.Key+"="+label.Value))
+			args = append(args, "--label "+label.Key+"="+label.Value)
 		}
 	}
 
 	if o.BuildCommand != "" {
-		args = append(args, fmt.Sprintf("--build-cmd %q", o.BuildCommand))
+		args = append(args, "--build-cmd "+o.BuildCommand)
 	}
 	if o.Platform != "" {
-		args = append(args, fmt.Sprintf("--platform %q", o.Platform))
+		args = append(args, "--platform "+o.Platform)
 	}
 
 	if o.StartCommand != "" {
-		args = append(args, fmt.Sprintf("--start-cmd %q", o.StartCommand))
+		args = append(args, "--start-cmd "+o.StartCommand)
 	}
 
 	if o.CurrentDirectory {
@@ -115,13 +113,13 @@ func (o *BuildOptions) ToArgs() []string {
 
 	if len(o.NixPackages) != 0 {
 		for _, pkg := range o.NixPackages {
-			args = append(args, fmt.Sprintf("--pkgs %q", pkg))
+			args = append(args, "--pkgs "+pkg)
 		}
 	}
 
 	if len(o.AptPackages) != 0 {
 		for _, pkg := range o.AptPackages {
-			args = append(args, fmt.Sprintf("--apt %q", pkg))
+			args = append(args, "--apt "+pkg)
 		}
 	}
 
@@ -131,18 +129,18 @@ func (o *BuildOptions) ToArgs() []string {
 
 	if len(o.NixLibraries) != 0 {
 		for _, lib := range o.NixLibraries {
-			args = append(args, fmt.Sprintf("--libs %q", lib))
+			args = append(args, "--libs "+lib)
 		}
 	}
 
 	if len(o.Envs) != 0 {
 		for _, env := range o.Envs {
-			args = append(args, fmt.Sprintf("--env %q", env.Key+"="+env.Value))
+			args = append(args, "--env "+env.Key+"="+env.Value)
 		}
 	}
 
 	if o.Config != "" {
-		args = append(args, fmt.Sprintf("--config %q", o.Config))
+		args = append(args, "--config "+o.Config)
 	}
 
 	if o.NoErrorWithoutStartCommand {
