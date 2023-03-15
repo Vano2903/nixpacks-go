@@ -14,8 +14,9 @@ func (n Nixpacks) Plan(ctx context.Context, opt PlanOptions) (*PlanCmd, error) {
 		return nil, err
 	}
 
-	cmd := exec.CommandContext(ctx, n.commandPath, PlanCommand, opt.Path)
+	cmd := exec.CommandContext(ctx, n.commandPath, PlanCommand)
 	cmd.Args = append(cmd.Args, opt.ToArgs()...)
+	cmd.Args = append(cmd.Args, opt.Path)
 
 	return &PlanCmd{
 		cmd: cmd,
