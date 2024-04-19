@@ -5,14 +5,14 @@ import (
 	"os/exec"
 )
 
-type PlanCmd struct {
+type DetectCmd struct {
 	cmd *exec.Cmd
 	err error
 }
 
-func (n Nixpacks) Plan(ctx context.Context, opt PlanOptions) *PlanCmd {
+func (n Nixpacks) Detect(ctx context.Context, opt DetectOptions) *DetectCmd {
 	if err := opt.Validate(); err != nil {
-		return &PlanCmd{
+		return &DetectCmd{
 			cmd: nil,
 			err: err,
 		}
@@ -22,18 +22,18 @@ func (n Nixpacks) Plan(ctx context.Context, opt PlanOptions) *PlanCmd {
 	cmd.Args = append(cmd.Args, opt.ToArgs()...)
 	cmd.Args = append(cmd.Args, opt.Path)
 
-	return &PlanCmd{
+	return &DetectCmd{
 		cmd: cmd,
 		err: nil,
 	}
 }
 
-func (c *PlanCmd) Error() error {
+func (c *DetectCmd) Error() error {
 	return c.err
 }
 
-func (c *PlanCmd) Result() (PlanOutput, error) {
-	b := PlanOutput{}
+func (c *DetectCmd) Result() (DetectOutput, error) {
+	b := DetectOutput{}
 	out, err := c.cmd.CombinedOutput()
 	if err != nil {
 		if err.Error() == "signal: killed" {
