@@ -1,16 +1,20 @@
 package nixpacks
 
-import "encoding/json"
+import "bytes"
 
 type DetectOutput struct {
-	Response   []byte
-	Providers  []string          `json:"providers"`
-	BuildImage string            `json:"buildImage"`
-	Variables  map[string]string `json:"variables"`
-	Phases     Phases            `json:"phases"`
-	Start      Start             `json:"start"`
+	Response  []byte
+	Providers []string `json:"providers"`
 }
 
 func (b *DetectOutput) Parse() error {
-	return json.Unmarshal(b.Response, b)
+	b.Response = bytes.TrimSpace(b.Response)
+	if len(b.Response) == 0 {
+		return nil
+	}
+	providers := bytes.Split(b.Response, []byte(", "))
+	for _, p := range providers {
+		b.Providers = append(b.Providers, string(p))
+	}
+	return nil
 }
