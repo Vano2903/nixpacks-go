@@ -18,7 +18,7 @@ func (n Nixpacks) Detect(ctx context.Context, opt DetectOptions) *DetectCmd {
 		}
 	}
 
-	cmd := exec.CommandContext(ctx, n.commandPath, PlanCommand)
+	cmd := exec.CommandContext(ctx, n.commandPath, DetectCommand)
 	cmd.Args = append(cmd.Args, opt.ToArgs()...)
 	cmd.Args = append(cmd.Args, opt.Path)
 
